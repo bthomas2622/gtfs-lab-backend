@@ -1,0 +1,45 @@
+{
+  "name": "public-transit-tourney",
+  "version": "1.0.0",
+  "description": "Ranking city public transit systems",
+  "main": "app.js",
+  "scripts": {
+    "start": "babel src -d build && node build/app.js",
+    "dev": "cross-env NODE_ENV=development nodemon ./src/app.js --exec babel-node --ignore *.spec.js",
+    "test": "cross-env NODE_ENV=test mocha ./test --recursive --exit --require babel-core/register"
+  },
+  "babel": {
+    "presets": [
+      [
+        "env",
+        {
+          "targets": {
+            "node": "current"
+          }
+        }
+      ]
+    ]
+  },
+  "author": "Ben Thomas",
+  "license": "ISC",
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "chai": "^4.1.2",
+    "chai-http": "^4.0.0",
+    "cross-env": "^5.1.5",
+    "eslint-config-airbnb": "^16.1.0",
+    "eslint-plugin-import": "^2.11.0",
+    "eslint-plugin-jsx-a11y": "^6.0.3",
+    "eslint-plugin-react": "^7.7.0",
+    "mocha": "^5.1.1",
+    "nodemon": "^1.17.4"
+  },
+  "dependencies": {
+    "axios": "^0.18.0",
+    "body-parser": "^1.18.2",
+    "eslint": "^4.19.1",
+    "express": "^4.16.3",
+    "morgan": "^1.9.0"
+  }
+}
