@@ -6,7 +6,8 @@
   "scripts": {
     "start": "babel src -d build && node build/app.js",
     "dev": "cross-env NODE_ENV=development nodemon ./src/app.js --exec babel-node --ignore *.spec.js",
-    "test": "cross-env NODE_ENV=test mocha ./test --recursive --exit --require babel-core/register"
+    "test": "cross-env NODE_ENV=test mocha ./test --recursive --exit --require babel-core/register",
+    "downloadGTFS": "babel-node src/data/processGTFSzip.js"
   },
   "babel": {
     "presets": [
@@ -36,6 +37,7 @@
     "nodemon": "^1.17.4"
   },
   "dependencies": {
+    "adm-zip": "^0.4.9",
     "axios": "^0.18.0",
     "body-parser": "^1.18.2",
     "eslint": "^4.19.1",

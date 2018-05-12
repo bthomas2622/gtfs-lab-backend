@@ -1,0 +1,10 @@
+{
+    "MARTA": {
+        "location": {
+            "city": "Atlanta",
+            "state": "GA",
+            "country": "USA"
+        },
+        "google_transit_zip": "http://www.itsmarta.com/google_transit_feed/google_transit.zip"
+    }
+}
