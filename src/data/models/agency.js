@@ -1,10 +1,11 @@
-import { Schema, Model } from 'mongoose';
+import mongoose from 'mongoose';
 
-const Agency = Model('Agency', new Schema({
+const AgencyModel = mongoose.model('Agency', new mongoose.Schema({
   agency_id: {
     type: String,
     required: true,
     index: true,
+    unique: true,
   },
   agency_name: String,
   agency_url: String,
@@ -12,8 +13,14 @@ const Agency = Model('Agency', new Schema({
   agency_lang: String,
   agency_phone: String,
   agency_email: String,
-  created: Date,
-  last_updated: Date,
+  created: {
+    type: Date,
+    default: Date.now,
+  },
+  last_updated: {
+    type: Date,
+    default: Date.now,
+  },
 }));
 
-export default Agency;
+export default AgencyModel;
