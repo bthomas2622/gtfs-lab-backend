@@ -4,7 +4,6 @@ const AgencyModel = mongoose.model('Agency', new mongoose.Schema({
   agency_id: {
     type: String,
     required: true,
-    index: true,
     unique: true,
   },
   agency_name: String,

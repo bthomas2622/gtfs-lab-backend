@@ -34,25 +34,33 @@ parseCSV('src/data/gtfsStatic/MARTA/agency.txt').then((data) => {
   const headerArray = data[0];
   mongoose.connect('mongodb://localhost/publictransittourney');
   const db = mongoose.connection;
-  db.on('error', console.error.bind(console, 'connection error:'));
+  db.on('error', ((err) => {
+    console.error(err);
+    mongoose.disconnect();
+  }));
   db.once('open', () => {
     const input = {};
     for (let i = 0; i < headerArray.length; i += 1) {
       input[headerArray[i]] = data[1][i];
     }
     const agency = new AgencyModel(input);
-    agency.save((err) => {
-      if (err) throw err;
-    });
-    AgencyModel.find((err, agencies) => {
+    const upsertAgency = agency.toObject();
+    const agencyExists = AgencyModel.find((err, agencies) => {
       if (err) return console.error(err);
-      console.log(agencies);
-      return null;
+      if (agencies.length === 0 || agencies === undefined) {
+        return false;
+      }
+      return true;
     });
-    // yolo.find({ agency_id: 'MARTA' }, (err, docs) => {
-    //   console.log(docs);
-    // });
-    // console.log(marta);
+    if (agencyExists) {
+      delete upsertAgency._id;
+      delete upsertAgency.created;
+    }
+    AgencyModel.update(
+      { agency_id: input.agency_id },
+      upsertAgency,
+      { upsert: true },
+      ((err) => { if (err) throw err; }),
+    );
   });
 }).catch(err => console.error(err));
-
