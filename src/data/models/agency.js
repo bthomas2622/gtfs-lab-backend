@@ -1,6 +1,11 @@
 import mongoose from 'mongoose';
 
 const AgencyModel = mongoose.model('Agency', new mongoose.Schema({
+  agency_key: {
+    type: Number,
+    required: true,
+    unique: true,
+  },
   agency_id: {
     type: String,
     required: true,
