@@ -5,10 +5,14 @@ import AgencyKeyMapper from '../util/AgencyKeyMapper.json';
 import parseCSV from '../util/parseCSVtoArray';
 
 const loadCSV = (csvToLoad=> new Promise((async (resolve, reject) => {
-  await parseCSV(csvToLoad).then((data) => {
-    console.log('finished');
-    resolve('blah');
-  });
+  try {
+    await parseCSV(csvToLoad).then((data) => {
+      console.log('finished');
+      resolve('blah');
+    });
+  } catch (error) {
+    reject(error);
+  }
 })));
   //   const headerArray = data[0];
   //   mongoose.connect('mongodb://localhost/publictransittourney');
@@ -53,17 +57,31 @@ const loadCSV = (csvToLoad=> new Promise((async (resolve, reject) => {
   // }).catch(err => console.error(err));
 // };
 
+async function asyncForEach(array, callback) {
+  for (let index = 0; index < array.length; index += 1) {
+    await callback(array[index], index, array)
+  }
+}
+
 const staticGTFSloadController = (agency) => {
   const agencyFolder = `src/data/gtfsStatic/${agency}`;
   const agencyFiles = [];
-  fs.readdir(agencyFolder, (err, files) => {
-    files.forEach(async (file) => {
+  fs.readdir(agencyFolder, async (err, files) => {
+    await asyncForEach(files, async (file) => {
       console.log(`${agencyFolder}/${file}`);
       agencyFiles.push(`${agencyFolder}/${file}`);
-      await loadCSV(file);
+      console.log('in loop');
+      await loadCSV(`${agencyFolder}/${file}`);
     });
+    // files.forEach(async (file) => {
+    //   console.log(`${agencyFolder}/${file}`);
+    //   agencyFiles.push(`${agencyFolder}/${file}`);
+    //   await loadCSV(file);
+    // });
     console.log(`GTFS files for ${agency} loaded`);
   });
 };
+
+
 
 export default staticGTFSloadController;
