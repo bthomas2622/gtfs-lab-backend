@@ -4,13 +4,14 @@ import AgencyModel from '../data/models/agency';
 import AgencyKeyMapper from '../util/AgencyKeyMapper.json';
 import parseCSV from '../util/parseCSVtoArray';
 import asyncForEach from '../util/asyncForEach';
+import modelHash from '../data/models/modelHash';
 
 const loadCSV = (csvToLoad => new Promise((async (resolve, reject) => {
   try {
     await parseCSV(csvToLoad).then((data) => {
-      const file = csvToLoad.substring(csvToLoad.lastIndexOf('/') + 1);
-      console.log('parsed file');
-      console.log(file);
+      const fileName = csvToLoad.substring(csvToLoad.lastIndexOf('/') + 1);
+      console.log('parsed filename');
+      console.log(fileName);
       const headerArray = data[0];
       mongoose.connect('mongodb://localhost/publictransittourney');
       const db = mongoose.connection;
