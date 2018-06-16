@@ -7,13 +7,9 @@ const parseCSV = (file => new Promise(((resolve, reject) => {
   const outstream = new Stream();
   const reader = readline.createInterface(instream, outstream);
   const csvToArray = [];
-  let model;
-  if (file.includes('agency')) {
-    model = 'agency';
-  } else {
-    model = 'not agency';
-  }
-  console.log(model);
+
+  console.log(file);
+
   try {
     let lineNum = 1;
     reader.on('line', ((line) => {
@@ -31,7 +27,6 @@ const parseCSV = (file => new Promise(((resolve, reject) => {
       resolve(csvToArray);
     }));
   } catch (err) {
-    console.log('erroroereor');
     reject(err);
   }
 })));
