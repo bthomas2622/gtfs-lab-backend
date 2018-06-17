@@ -3,12 +3,13 @@ import Stream from 'stream';
 import readline from 'readline';
 
 const parseCSV = (file => new Promise(((resolve, reject) => {
-  const instream = fs.createReadStream(file);
+  const instream = fs.createReadStream(file.filePath);
   const outstream = new Stream();
   const reader = readline.createInterface(instream, outstream);
   const csvToArray = [];
 
-  console.log(file);
+  console.log('in parse csv');
+  console.log(file.filePath);
 
   try {
     let lineNum = 1;
@@ -23,7 +24,7 @@ const parseCSV = (file => new Promise(((resolve, reject) => {
       lineNum += 1;
     }));
     reader.on('close', (() => {
-      console.log(`done reading ${file}`);
+      console.log(`done reading ${file.filePath}`);
       resolve(csvToArray);
     }));
   } catch (err) {

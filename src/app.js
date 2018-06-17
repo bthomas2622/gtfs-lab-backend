@@ -1,11 +1,18 @@
 import bodyParser from 'body-parser';
 import morgan from 'morgan';
 import express from 'express';
+import mongoose from 'mongoose';
 
 import pkg from '../package.json';
-// import routes from './routes/index';
+import routes from './routes/index';
 
+const PORT = process.env.PORT || 3000;
 const app = express();
+
+mongoose.Promise = global.Promise;
+mongoose.connect('mongodb://localhost/publictransittourney', { keepAlive: 120 })
+  .then(() => console.log('mongo connection successful'))
+  .catch(err => console.error(err));
 
 app.use(morgan('dev'));
 app.use(bodyParser.json());
@@ -30,9 +37,8 @@ app.get('/health', (req, res) => {
   res.status(200).send({ status: 'UP' });
 });
 
-// app.use('/', routes);
+app.use('/static', routes);
 
-const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
   console.log(`App listening on port ${PORT}`);
   console.log('Press Ctrl+C to quit.');

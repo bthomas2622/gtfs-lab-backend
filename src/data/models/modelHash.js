@@ -8,13 +8,13 @@ import StopModel from './stops';
 import TripModel from './trips';
 
 const modelHash = {};
-modelHash['agency.txt'] = AgencyModel;
-modelHash['calendar_dates.txt'] = CalendarDateModel;
-modelHash['calendar.txt'] = CalendarModel;
-modelHash['routes.txt'] = RouteModel;
-modelHash['shapes.txt'] = ShapeModel;
-modelHash['stops.txt'] = StopModel;
-modelHash['stop_times.txt'] = StopTimeModel;
-modelHash['trips.txt'] = TripModel;
+modelHash['agency.txt'] = { model: AgencyModel, docName: 'agencies' };
+modelHash['calendar_dates.txt'] = { model: CalendarDateModel, docName: 'calendardates' };
+modelHash['calendar.txt'] = { model: CalendarModel, docName: 'calendars' };
+modelHash['routes.txt'] = { model: RouteModel, docName: 'routes' };
+modelHash['shapes.txt'] = { model: ShapeModel, docName: 'shapes' };
+modelHash['stops.txt'] = { model: StopModel, docName: 'stops' };
+modelHash['stop_times.txt'] = { model: StopTimeModel, docName: 'stoptimes' };
+modelHash['trips.txt'] = { model: TripModel, docName: 'trips' };
 
 export default modelHash;
