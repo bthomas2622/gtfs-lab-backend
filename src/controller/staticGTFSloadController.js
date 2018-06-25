@@ -56,12 +56,12 @@ const loadCSV = (csvToLoad => new Promise((async (resolve, reject) => {
           { agency_key: input.agency_key },
           upsertMongoDocument,
           { upsert: true },
-          ((err) => { if (err) throw err; mongoose.disconnect(); }),
+          ((err) => { if (err) console.log(err); throw err; }),
         );
       } else {
         console.log('doc save');
         await mongoDocument.save((err) => {
-          if (err) throw err; mongoose.disconnect();
+          if (err) console.log(err); throw err;
         });
       }
       console.log(`done updating ${csvToLoad.agency}`);
