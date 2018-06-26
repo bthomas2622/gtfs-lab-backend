@@ -15,20 +15,15 @@ const loadCSV = (csvToLoad => new Promise((async (resolve, reject) => {
       console.log(fileName);
       const headerArray = data[0];
       const MongoModel = modelHash[fileName].model;
-      // mongoose.connect('mongodb://localhost/publictransittourney');
-      // const db = mongoose.connection;
-      // db.on('error', ((err) => {
-      //   console.error(err);
-      //   mongoose.disconnect();
-      // }));
-      // db.once('open', async () => {
       const input = {};
       for (let i = 0; i < headerArray.length; i += 1) {
         input[headerArray[i]] = data[1][i];
-        input.agency_key = AgencyKeyMapper[csvToLoad.agency];
+        console.log(csvToLoad.agency);
+        input.agency_key = AgencyKeyMapper[csvToLoad.agency.toLowerCase()];
+        // TODO CHECK AGENCY KEY ASSIGNMENT
       }
+      console.log(input);
       const mongoDocument = new MongoModel(input);
-      console.log('document type');
       console.log(mongoDocument);
       const upsertMongoDocument = mongoDocument.toObject();
       let documentExists;
@@ -45,11 +40,7 @@ const loadCSV = (csvToLoad => new Promise((async (resolve, reject) => {
         }
         return 'Find Finished';
       });
-      console.log('documentExists');
-      console.log(documentExists);
       if (documentExists) {
-        console.log('doc exists');
-        console.log(documentExists);
         delete upsertMongoDocument._id;
         delete upsertMongoDocument.created;
         await MongoModel.update(
@@ -64,12 +55,9 @@ const loadCSV = (csvToLoad => new Promise((async (resolve, reject) => {
           if (err) console.log(err); throw err;
         });
       }
-      console.log(`done updating ${csvToLoad.agency}`);
-      // mongoose.disconnect();
-      // console.log('mongodb connection closed');
-      resolve('blah');
+      console.log(`done updating ${fileName}`);
+      resolve(`done updating ${fileName}`);
     });
-  //   }).catch(err => console.error(err));
   } catch (error) {
     reject(error);
   }
