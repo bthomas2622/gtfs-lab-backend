@@ -28,6 +28,7 @@ const parseCSV = (file => new Promise(((resolve, reject) => {
       resolve(csvToArray);
     }));
   } catch (err) {
+    console.error('error rejected in parseCSV');
     reject(err);
   }
 })));

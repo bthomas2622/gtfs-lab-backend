@@ -11,54 +11,66 @@ const loadCSV = (csvToLoad => new Promise((async (resolve, reject) => {
   try {
     await parseCSV(csvToLoad).then(async (data) => {
       const fileName = csvToLoad.filePath.substring(csvToLoad.filePath.lastIndexOf('/') + 1);
+
       console.log('parsed filename');
       console.log(fileName);
+
       const headerArray = data[0];
       const MongoModel = modelHash[fileName].model;
       const input = {};
+
       for (let i = 0; i < headerArray.length; i += 1) {
         input[headerArray[i]] = data[1][i];
-        console.log(csvToLoad.agency);
+        // console.log(csvToLoad.agency);
         input.agency_key = AgencyKeyMapper[csvToLoad.agency.toLowerCase()];
-        // TODO CHECK AGENCY KEY ASSIGNMENT
       }
-      console.log(input);
+
+      // console.log(input);
+
       const mongoDocument = new MongoModel(input);
-      console.log(mongoDocument);
+
+      // console.log(mongoDocument);
+
       const upsertMongoDocument = mongoDocument.toObject();
-      let documentExists;
-      await MongoModel.find((err, docs) => {
+
+      // console.log('upsertMongoDocument');
+      // console.log(upsertMongoDocument);
+
+      const documentExists = await MongoModel.find((err, docs) => {
         console.log('finding docs');
-        console.log(docs);
+        // console.log(docs);
         if (err) return console.error(err);
         console.log(docs.length);
         if (docs.length === 0 || docs === undefined) {
           console.log('false');
-          documentExists = false;
-        } else {
-          documentExists = true;
+          return false;
         }
-        return 'Find Finished';
+        console.log('true');
+        return true;
       });
+
       if (documentExists) {
+        console.log('in document exists');
         delete upsertMongoDocument._id;
         delete upsertMongoDocument.created;
+        console.log('past deletes onto update');
         await MongoModel.update(
           { agency_key: input.agency_key },
           upsertMongoDocument,
           { upsert: true },
-          ((err) => { if (err) console.log(err); throw err; }),
+          ((err) => { if (err) console.error(err); }),
         );
       } else {
         console.log('doc save');
         await mongoDocument.save((err) => {
-          if (err) console.log(err); throw err;
+          if (err) console.error(err);
         });
       }
       console.log(`done updating ${fileName}`);
       resolve(`done updating ${fileName}`);
     });
   } catch (error) {
+    console.error('error caught');
     reject(error);
   }
 })));
