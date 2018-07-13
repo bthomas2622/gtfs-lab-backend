@@ -2,6 +2,7 @@ import mongoose from 'mongoose';
 import fs from 'fs';
 import AgencyKeyMapper from '../util/AgencyKeyMapper.json';
 import parseCSV from '../util/parseCSVtoArray';
+import modelUpsert from '../util/modelUpsert';
 import asyncForEach from '../util/asyncForEach';
 import modelHash from '../data/models/modelHash';
 
@@ -18,53 +19,18 @@ const loadCSV = (csvToLoad => new Promise((async (resolve, reject) => {
       const headerArray = data[0];
       const MongoModel = modelHash[fileName].model;
       const input = {};
-
-      for (let i = 0; i < headerArray.length; i += 1) {
-        input[headerArray[i]] = data[1][i];
-        // console.log(csvToLoad.agency);
-        input.agency_key = AgencyKeyMapper[csvToLoad.agency.toLowerCase()];
-      }
-
-      // console.log(input);
-
-      const mongoDocument = new MongoModel(input);
-
-      // console.log(mongoDocument);
-
-      const upsertMongoDocument = mongoDocument.toObject();
-
-      // console.log('upsertMongoDocument');
-      // console.log(upsertMongoDocument);
-
-      const documentExists = await MongoModel.find((err, docs) => {
-        console.log('finding docs');
-        // console.log(docs);
-        if (err) return console.error(err);
-        console.log(docs.length);
-        if (docs.length === 0 || docs === undefined) {
-          console.log('false');
-          return false;
-        }
-        console.log('true');
-        return true;
-      });
-
-      if (documentExists) {
-        console.log('in document exists');
-        delete upsertMongoDocument._id;
-        delete upsertMongoDocument.created;
-        console.log('past deletes onto update');
-        await MongoModel.update(
-          { agency_key: input.agency_key },
-          upsertMongoDocument,
-          { upsert: true },
-          ((err) => { if (err) console.error(err); }),
-        );
+      if (fileName === 'shapes.txt') {
+        console.log('skipping shapes');
       } else {
-        console.log('doc save');
-        await mongoDocument.save((err) => {
-          if (err) console.error(err);
-        });
+        for (let j = 1; j < data.length; j += 1) {
+          for (let i = 0; i < headerArray.length; i += 1) {
+            input[headerArray[i]] = data[j][i];
+            input.agency_key = AgencyKeyMapper[csvToLoad.agency.toLowerCase()];
+            await modelUpsert(MongoModel, input, fileName);
+            // console.log(update);
+          }
+          // input = {};
+        }
       }
       console.log(`done updating ${fileName}`);
       resolve(`done updating ${fileName}`);

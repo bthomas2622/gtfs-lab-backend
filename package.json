@@ -1,7 +1,7 @@
 {
-  "name": "public-transit-tourney",
+  "name": "gtfs-lab",
   "version": "1.0.0",
-  "description": "Ranking city public transit systems",
+  "description": "Experimenting with General Transit Feed Specification (GTFS)",
   "main": "app.js",
   "scripts": {
     "start": "babel src -d build && node build/app.js",
