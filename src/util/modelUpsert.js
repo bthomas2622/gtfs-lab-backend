@@ -2,22 +2,30 @@ const modelUpsert = ((MongoModel, input, fileName) => new Promise((async (resolv
   try {
     const mongoDocument = new MongoModel(input);
     const upsertMongoDocument = mongoDocument.toObject();
-    const documentExists = await MongoModel.find((err, docs) => {
-    //   console.log('finding docs');
-      if (err) return console.error(err);
-      //   console.log(docs.length);
-      if (docs.length === 0 || docs === undefined) {
-        // console.log('false');
-        return false;
-      }
-      //   console.log('true');
-      return true;
-    });
+    const finderDocument = upsertMongoDocument;
+    delete finderDocument._id;
+    delete finderDocument.created;
+    delete finderDocument.last_updated;
+    let documentExists;
+    let docs;
+    try {
+      console.log(finderDocument);
+      docs = await MongoModel.find(finderDocument);
+    } catch (findError) {
+      console.error(findError);
+    }
+    console.log('docs');
+    console.log(docs);
+    if (docs.length === 0 || docs === undefined) {
+      documentExists = false;
+    } else {
+      documentExists = true;
+    }
+    console.log(documentExists);
     if (documentExists) {
-    //   console.log('in document exists');
+      console.log('update');
       delete upsertMongoDocument._id;
       delete upsertMongoDocument.created;
-      //   console.log('past deletes onto update');
       await MongoModel.update(
         { agency_key: input.agency_key },
         upsertMongoDocument,
@@ -25,7 +33,7 @@ const modelUpsert = ((MongoModel, input, fileName) => new Promise((async (resolv
         ((err) => { if (err) console.error(err); }),
       );
     } else {
-    //   console.log('doc save');
+      console.log('save');
       await mongoDocument.save((err) => {
         if (err) console.error(err);
       });

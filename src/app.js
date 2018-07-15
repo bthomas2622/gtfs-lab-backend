@@ -10,7 +10,7 @@ const PORT = process.env.PORT || 3000;
 const app = express();
 
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://localhost/publictransittourney', { keepAlive: 120 })
+mongoose.connect('mongodb://localhost/gtfslab', { keepAlive: 120 })
   .then(() => console.log('mongo connection successful'))
   .catch(err => console.error(err));
 
