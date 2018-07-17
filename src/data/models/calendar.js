@@ -62,6 +62,10 @@ const CalendarModel = mongoose.model('Calendar', new mongoose.Schema({
     required: true,
     min: 10000000,
   },
+  created: {
+    type: Date,
+    default: Date.now,
+  },
 }));
 
 export default CalendarModel;

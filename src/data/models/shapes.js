@@ -32,6 +32,10 @@ const ShapeModel = mongoose.model('Shape', new mongoose.Schema({
     required: true,
   },
   shape_dist_traveled: Number,
+  created: {
+    type: Date,
+    default: Date.now,
+  },
 }));
 
 export default ShapeModel;

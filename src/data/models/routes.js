@@ -29,6 +29,10 @@ const RouteModel = mongoose.model('Route', new mongoose.Schema({
   route_url: String,
   route_color: String,
   route_text_color: String,
+  created: {
+    type: Date,
+    default: Date.now,
+  },
 }));
 
 export default RouteModel;

@@ -50,6 +50,10 @@ const StopModel = mongoose.model('Stop', new mongoose.Schema({
     min: 0,
     max: 2,
   },
+  created: {
+    type: Date,
+    default: Date.now,
+  },
 }));
 
 export default StopModel;

@@ -5,25 +5,23 @@ const modelUpsert = ((MongoModel, input, fileName) => new Promise((async (resolv
     const finderDocument = upsertMongoDocument;
     delete finderDocument._id;
     delete finderDocument.created;
-    delete finderDocument.last_updated;
+    if (Object.prototype.hasOwnProperty.call(finderDocument, 'last_updated')) {
+      delete finderDocument.last_updated;
+    }
     let documentExists;
     let docs;
+
     try {
-      console.log(finderDocument);
       docs = await MongoModel.find(finderDocument);
     } catch (findError) {
       console.error(findError);
     }
-    console.log('docs');
-    console.log(docs);
     if (docs.length === 0 || docs === undefined) {
       documentExists = false;
     } else {
       documentExists = true;
     }
-    console.log(documentExists);
     if (documentExists) {
-      console.log('update');
       delete upsertMongoDocument._id;
       delete upsertMongoDocument.created;
       await MongoModel.update(
@@ -33,7 +31,6 @@ const modelUpsert = ((MongoModel, input, fileName) => new Promise((async (resolv
         ((err) => { if (err) console.error(err); }),
       );
     } else {
-      console.log('save');
       await mongoDocument.save((err) => {
         if (err) console.error(err);
       });

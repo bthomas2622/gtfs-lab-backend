@@ -21,6 +21,10 @@ const CalendarDateModel = mongoose.model('CalendarDate', new mongoose.Schema({
     max: 2,
   },
   holiday_name: String,
+  created: {
+    type: Date,
+    default: Date.now,
+  },
 }));
 
 export default CalendarDateModel;

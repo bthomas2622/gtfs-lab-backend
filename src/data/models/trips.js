@@ -41,6 +41,10 @@ const TripModel = mongoose.model('Trip', new mongoose.Schema({
     min: 0,
     max: 2,
   },
+  created: {
+    type: Date,
+    default: Date.now,
+  },
 }));
 
 export default TripModel;
