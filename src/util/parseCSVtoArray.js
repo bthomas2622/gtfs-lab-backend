@@ -18,8 +18,9 @@ const parseCSV = (file => new Promise(((resolve, reject) => {
         const headers = line.split(',');
         csvToArray.push(headers);
       } else {
-        const entry = line.split(',');
-        csvToArray.push(entry);
+        // regex to make sure commas inside quotations are ignored for the string split
+        const match = line.match(/(".*?"|[^",]+)(?=\s*,|\s*$)/g);
+        csvToArray.push(match);
       }
       lineNum += 1;
     }));
