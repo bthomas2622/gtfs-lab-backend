@@ -4,6 +4,7 @@
         "no-console": "off",
         "linebreak-style": ["error", "windows"],
         "no-underscore-dangle": 0,
-        "no-await-in-loop": 0
+        "no-await-in-loop": 0,
+        "consistent-return": 0
     }
 }

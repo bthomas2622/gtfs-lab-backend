@@ -41,21 +41,22 @@ const staticGTFSloadController = (req, res) => {
   fs.readdir(agencyFolder, async (err, files) => {
     if (err) {
       console.error(err);
-      res.send('File Read Error');
+      res.send('File read error');
     }
+    res.send(`GTFS files for ${agency} processing`);
     await asyncForEach(files, async (file) => {
       console.log(`${agencyFolder}/${file}`);
       console.log('in loop');
       const csvInfo = { filePath: `${agencyFolder}/${file}`, agency };
-      // if (file === 'shapes.txt' || file === 'stop_times.txt' || file === 'trips.txt') {
-      if (file !== 'stops.txt') {
-        console.log('skip shapes and stop times data');
+      if (file === 'shapes.txt' || file === 'stop_times.txt') {
+      // if (file === 'shapes.txt') {
+        console.log('skip shapes data');
       } else {
         await loadCSV(csvInfo);
       }
     });
     console.log(`GTFS files for ${agency} loaded`);
-    res.send(`GTFS files for ${agency} loaded`);
+    // res.send(`GTFS files for ${agency} loaded`);
   });
 };
 
