@@ -24,8 +24,8 @@ const loadCSV = (csvToLoad => new Promise((async (resolve, reject) => {
       for (let i = 0; i < headerArray.length; i += 1) {
         input[headerArray[i]] = data[j][i];
         input.agency_key = AgencyKeyMapper[csvToLoad.agency.toLowerCase()];
-        await modelUpsert(MongoModel, input, fileName);
       }
+      await modelUpsert(MongoModel, input, fileName);
     }
     console.log(`done updating ${fileName}`);
     resolve(`done updating ${fileName}`);
@@ -41,15 +41,16 @@ const staticGTFSloadController = (req, res) => {
   fs.readdir(agencyFolder, async (err, files) => {
     if (err) {
       console.error(err);
-      res.send('File read error');
+      res.status(500).send('File read error');
     }
-    res.send(`GTFS files for ${agency} processing`);
+    res.status(200).send(`GTFS files for ${agency} processing`);
+    console.log(`GTFS files for ${agency} processing`);
     await asyncForEach(files, async (file) => {
       console.log(`${agencyFolder}/${file}`);
       console.log('in loop');
       const csvInfo = { filePath: `${agencyFolder}/${file}`, agency };
-      if (file === 'shapes.txt' || file === 'stop_times.txt') {
-      // if (file === 'shapes.txt') {
+      // if (file === 'shapes.txt' || file === 'stop_times.txt') {
+      if (file === 'shapes.txt') {
         console.log('skip shapes data');
       } else {
         await loadCSV(csvInfo);

@@ -13,9 +13,11 @@ const parseCSV = (file => new Promise(((resolve, reject) => {
 
   try {
     let lineNum = 1;
+    let colNum;
     reader.on('line', ((line) => {
       if (lineNum === 1) {
         const headers = line.split(',');
+        colNum = headers.length;
         csvToArray.push(headers);
       } else {
         // Online csv regex parse algorithm - https://stackoverflow.com/questions/8493195/how-can-i-parse-a-csv-string-with-javascript-which-contains-comma-in-data
@@ -23,7 +25,23 @@ const parseCSV = (file => new Promise(((resolve, reject) => {
         const reValid = /^\s*(?:'[^'\\]*(?:\\[\S\s][^'\\]*)*'|"[^"\\]*(?:\\[\S\s][^"\\]*)*"|[^,'"\s\\]*(?:\s+[^,'"\s\\]+)*)\s*(?:,\s*(?:'[^'\\]*(?:\\[\S\s][^'\\]*)*'|"[^"\\]*(?:\\[\S\s][^"\\]*)*"|[^,'"\s\\]*(?:\s+[^,'"\s\\]+)*)\s*)*$/;
         const reValue = /(?!\s*$)\s*(?:'([^'\\]*(?:\\[\S\s][^'\\]*)*)'|"([^"\\]*(?:\\[\S\s][^"\\]*)*)"|([^,'"\s\\]*(?:\s+[^,'"\s\\]+)*))\s*(?:,|$)/g;
         // Return NULL if input string is not well formed CSV string.
-        if (!reValid.test(line)) return null;
+        if (!reValid.test(line)) {
+          console.error('invalid line - regex failure');
+          console.error(line);
+          try {
+            const traditionalSplit = line.split(',');
+            console.log('test split');
+            console.log(traditionalSplit);
+            if (traditionalSplit.length === colNum) {
+              console.log('pushing test split to csv array');
+              csvToArray.push(traditionalSplit);
+            }
+            return null;
+          } catch (err) {
+            console.error(err);
+            return null;
+          }
+        }
         const array = []; // Initialize array to receive values.
         line.replace(
           reValue, // "Walk" the string using replace with callback.
