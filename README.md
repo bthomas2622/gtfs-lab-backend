@@ -3,16 +3,13 @@
 
 ## **About**
 
-**GTFS LAB** is a data exploration project centered around GTFS (General Transit Feed Specification) data. GTFS is a common format for public transportation schedules and associated  geographic information. Before GTFS emerged out of a Google employee side project there was no de facto standard for public transit timetables. Now this feed drives static and realtime public transit data used by applications like Google Maps.
+**GTFS LAB** is a data exploration project centered around GTFS (General Transit Feed Specification) data. Public transit is a huge passion of mine and I created GTFS Lab to explore the space. My hope is the project can lead to insights that help us progress the puzzle of walkable, sustainable, connected cities for everyone. 
 
-Public transit is a huge passion of mine and I created GTFS Lab to explore the space. My hope is the project can lead to insights that help us progress the puzzle of walkable, sustainable, connected cities for everyone. 
+GTFS Overview from [TransitWiki.org](https://www.transitwiki.org/TransitWiki/index.php/General_Transit_Feed_Specification)
 
-### **General Transit Feed Specification (GTFS) Resources**
+> The General Transit Feed Specification (GTFS) defines a common format for public transportation schedules and associated geographic information. GTFS "feeds" allow public transit agencies to publish their transit data and developers to use that data to write applications. The feeds are represented in a series of text files that are compressed into a ZIP file, and include information such as fixed-route schedules, routes, and bus stop data. GTFS datasets are used in a variety of types of applications, including trip planners such as Google Maps, mobile applications, timetable generation software, tools for transit planning and operations analysis, and other categories of applications
 
-* [Google Developers Reference](https://developers.google.com/transit/gtfs/reference/)
-* [Transit Wiki](https://www.transitwiki.org/TransitWiki/index.php/General_Transit_Feed_Specification)
-* [TransitWiki.org](https://www.transitwiki.org/TransitWiki/index.php/General_Transit_Feed_Specification)
-* [TransitWiki.org](https://www.transitwiki.org/TransitWiki/index.php/General_Transit_Feed_Specification)
+[Google Developers GTFS Reference](https://developers.google.com/transit/gtfs/reference/)
 
 ## **Directory Structure**
 
