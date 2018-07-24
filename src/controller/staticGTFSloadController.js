@@ -35,6 +35,7 @@ const loadCSV = (csvToLoad => new Promise((async (resolve, reject) => {
   }
 })));
 
+// TODO investigate possible duplicate of last row in csv because of empty last line in csv
 const staticGTFSloadController = (req, res) => {
   const { agency } = req.query;
   const agencyFolder = `src/data/gtfsStatic/${agency}`;
