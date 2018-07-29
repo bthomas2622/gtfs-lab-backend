@@ -25,13 +25,18 @@ const loadCSV = (csvToLoad => new Promise((async (resolve, reject) => {
         input[headerArray[i]] = data[j][i];
         input.agency_key = AgencyKeyMapper[csvToLoad.agency.toLowerCase()];
       }
-      await modelUpsert(MongoModel, input, fileName);
+      try {
+        await modelUpsert(MongoModel, input, fileName);
+      } catch (upsertError) {
+        console.error('upsert error caught');
+        console.error(upsertError);
+      }
     }
     console.log(`done updating ${fileName}`);
     resolve(`done updating ${fileName}`);
-  } catch (error) {
-    console.error('error caught');
-    reject(error);
+  } catch (loadError) {
+    console.error('load error caught');
+    reject(loadError);
   }
 })));
 
