@@ -55,11 +55,11 @@ const staticGTFSloadController = (req, res) => {
       console.log(`${agencyFolder}/${file}`);
       console.log('in loop');
       const csvInfo = { filePath: `${agencyFolder}/${file}`, agency };
-      // if (file === 'shapes.txt' || file === 'stop_times.txt') {
-      if (file === 'shapes.txt') {
-        console.log('skip shapes data');
-      } else {
+      // if (file === 'trips.txt') {
+      if (file === 'agency.txt' || file === 'calendar_dates.txt' || file === 'calendar.txt' || file === 'routes.txt' || file === 'stops.txt' || file === 'trips.txt') {
         await loadCSV(csvInfo);
+      } else {
+        console.log(`skip ${file} data`);
       }
     });
     console.log(`GTFS files for ${agency} loaded`);

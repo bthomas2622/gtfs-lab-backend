@@ -3,6 +3,7 @@ import staticGTFSloadController from '../controller/staticGTFSloadController';
 import datasetCountController from '../controller/datasetCountController';
 import geoCenterController from '../controller/geoCenterController';
 import agencyListController from '../controller/agencyListController';
+import weekendController from '../controller/weekendController';
 
 const router = express.Router();
 
@@ -20,6 +21,10 @@ router.get('/fetch/geo', (req, res) => {
 
 router.get('/fetch/agencies', (req, res) => {
   agencyListController(req, res);
+});
+
+router.get('/fetch/weekend', (req, res) => {
+  weekendController(req, res);
 });
 
 module.exports = router;
