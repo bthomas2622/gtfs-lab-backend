@@ -1,22 +1,7 @@
 import modelHash from '../data/models/modelHash';
 import AgencyKeyMapper from '../util/AgencyKeyMapper.json';
 
-const staticGTFScountController = async (req, res) => {
-  const { agency, dataset } = req.query;
-  const MongoModel = modelHash[`${dataset}.txt`].model;
-  MongoModel.count({ agency_key: AgencyKeyMapper[agency.toLowerCase()] }, (err, count) => {
-    if (err) {
-      console.error(err);
-      res.status(500).send('DB Error');
-    } else {
-      console.log('finding count');
-      console.log(count);
-      res.status(200).send({ count });
-    }
-  });
-};
-
-const staticGTFSgeoCenterController = async (req, res) => {
+const geoCenterController = async (req, res) => {
   const { agency } = req.query;
   const MongoModel = modelHash['stops.txt'].model;
   MongoModel.find({ agency_key: AgencyKeyMapper[agency.toLowerCase()] }, (err, docs) => {
@@ -51,7 +36,4 @@ const staticGTFSgeoCenterController = async (req, res) => {
   });
 };
 
-module.exports = {
-  staticGTFScountController,
-  staticGTFSgeoCenterController,
-};
+export default geoCenterController;

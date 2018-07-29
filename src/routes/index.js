@@ -1,6 +1,8 @@
 import express from 'express';
 import staticGTFSloadController from '../controller/staticGTFSloadController';
-import { staticGTFScountController, staticGTFSgeoCenterController } from '../controller/staticGTFSfetchController';
+import datasetCountController from '../controller/datasetCountController';
+import geoCenterController from '../controller/geoCenterController';
+import agencyListController from '../controller/agencyListController';
 
 const router = express.Router();
 
@@ -9,11 +11,15 @@ router.get('/load', (req, res) => {
 });
 
 router.get('/fetch/count', (req, res) => {
-  staticGTFScountController(req, res);
+  datasetCountController(req, res);
 });
 
 router.get('/fetch/geo', (req, res) => {
-  staticGTFSgeoCenterController(req, res);
+  geoCenterController(req, res);
+});
+
+router.get('/fetch/agencies', (req, res) => {
+  agencyListController(req, res);
 });
 
 module.exports = router;
