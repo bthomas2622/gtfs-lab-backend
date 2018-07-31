@@ -4,6 +4,7 @@ import datasetCountController from '../controller/datasetCountController';
 import geoCenterController from '../controller/geoCenterController';
 import agencyListController from '../controller/agencyListController';
 import weekendController from '../controller/weekendController';
+import transportTypeController from '../controller/transportTypeController';
 
 const router = express.Router();
 
@@ -25,6 +26,10 @@ router.get('/fetch/agencies', (req, res) => {
 
 router.get('/fetch/weekend', (req, res) => {
   weekendController(req, res);
+});
+
+router.get('/fetch/transport/types', (req, res) => {
+  transportTypeController(req, res);
 });
 
 module.exports = router;

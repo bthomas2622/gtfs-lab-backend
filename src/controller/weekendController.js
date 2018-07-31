@@ -6,7 +6,9 @@ const weekendController = async (req, res) => {
   const CalendarMongoModel = modelHash['calendar.txt'].model;
   const TripsMongoModel = modelHash['trips.txt'].model;
   const serviceIds = [];
-  CalendarMongoModel.find({ agency_key: AgencyKeyMapper[agency.toLowerCase()] }, (calendarErr, calendarDocs) => {
+  CalendarMongoModel.find({
+    agency_key: AgencyKeyMapper[agency.toLowerCase()],
+  }, (calendarErr, calendarDocs) => {
     if (calendarErr) {
       console.error(calendarErr);
       res.status(500).send('DB Error');
@@ -24,7 +26,9 @@ const weekendController = async (req, res) => {
           }
         }
       });
-      TripsMongoModel.find({ agency_key: AgencyKeyMapper[agency.toLowerCase()], service_id: { $in: serviceIds } }, (tripErr, tripDocs) => {
+      TripsMongoModel.find({
+        agency_key: AgencyKeyMapper[agency.toLowerCase()], service_id: { $in: serviceIds },
+      }, (tripErr, tripDocs) => {
         if (tripErr) {
           console.error(tripErr);
           res.status(500).send('DB Error');
