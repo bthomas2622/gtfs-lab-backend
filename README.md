@@ -24,7 +24,11 @@ The **"test"** folder holds the unit tests. The **"node_modules"** are the proje
 
 ## **Tech Choices**
 
-TBD
+* **MongoDB** - The only NoSQL db I had experience with before this project was CassandraDB which was a mostly positive experience. MongoDB is a unique NoSQL option that gets a decent about of buzz as part of a JS stack. I do not believe it is the best db choice for this project but I chose it because it was a technology I wanted to explore.  
+* **Node.js** - My personal favorite webapp backbone. I love how lightweight it is, adore NPM, and dig ECMA2018. It also made sense to go with JS for the MongoDB db choice. 
+* **Expressjs** - The leading web app framework for Node.js    
+* **Docker** - Containerization is one of the most exciting evolutions in tech right now. I have had great experience utilizing docker to stabilize deployments, streamline CI/CD, and scale apps. 
+* **Google Cloud Platform** - The cloud platform I have the most experience with. Features that made a good fit for my project: free trial, container image repository, app engine, and stackdriver logging. 
 
 ### **How to "Run"**
 
@@ -37,14 +41,14 @@ Anyone is welcome to re-use the code used in this project.
 #### **Tech Stack References**
 
 * [Node.js](https://nodejs.org/en/)
-* [Express](https://expressjs.com/)
+* [Expressjs](https://expressjs.com/)
 * [MongoDB](https://www.mongodb.com/)
 * [Babel](https://babeljs.io/)
 * [Docker](https://www.docker.com/)
 
 #### **Contact Me**
 
-For any questions please email me at _bthomas2622@gmail.com_
+For any questions please email me at _benthomasdeveloper@gmail.com_
 
 #### **License**
 
