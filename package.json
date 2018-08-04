@@ -1,6 +1,6 @@
 {
-  "name": "gtfs-lab",
-  "version": "1.0.0",
+  "name": "gtfs-lab-backend",
+  "version": "1.0.1",
   "description": "Experimenting with General Transit Feed Specification (GTFS)",
   "main": "app.js",
   "scripts": {
