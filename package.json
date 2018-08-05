@@ -39,7 +39,7 @@
     "nodemon": "^1.17.4"
   },
   "dependencies": {
-    "adm-zip": "^0.4.9",
+    "adm-zip": "^0.4.11",
     "axios": "^0.18.0",
     "body-parser": "^1.18.2",
     "eslint": "^4.19.1",
