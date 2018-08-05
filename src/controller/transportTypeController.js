@@ -40,6 +40,7 @@ const transportTypeController = async (req, res) => {
         }
       });
       res.status(200).send({
+        agency,
         transportType: transportMapping[mostPopularTransport.transport],
         percentage: Math.round((mostPopularTransport.count / numberOfRoutes) * 100) / 100,
       });
