@@ -2,7 +2,7 @@ import modelHash from '../data/models/modelHash';
 import AgencyKeyMapper from '../util/AgencyKeyMapper.json';
 
 const transportTypeController = async (req, res) => {
-  const { agency } = req.query;
+  let { agency } = req.query;
   let { agencyKey } = req.query;
   const MongoModel = modelHash['routes.txt'].model;
   const transportMapping = {
@@ -17,6 +17,9 @@ const transportTypeController = async (req, res) => {
   };
   if (agencyKey == null) {
     agencyKey = AgencyKeyMapper[agency.toLowerCase()];
+  }
+  if (agency == null) {
+    agency = 'N/A';
   }
   MongoModel.find({ agency_key: agencyKey }, (err, docs) => {
     if (err) {

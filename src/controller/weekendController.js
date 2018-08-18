@@ -2,12 +2,19 @@ import modelHash from '../data/models/modelHash';
 import AgencyKeyMapper from '../util/AgencyKeyMapper.json';
 
 const weekendController = async (req, res) => {
-  const { agency } = req.query;
+  let { agency } = req.query;
+  let { agencyKey } = req.query;
   const CalendarMongoModel = modelHash['calendar.txt'].model;
   const TripsMongoModel = modelHash['trips.txt'].model;
   const serviceIds = [];
+  if (agencyKey == null) {
+    agencyKey = AgencyKeyMapper[agency.toLowerCase()];
+  }
+  if (agency == null) {
+    agency = 'N/A';
+  }
   CalendarMongoModel.find({
-    agency_key: AgencyKeyMapper[agency.toLowerCase()],
+    agency_key: agencyKey,
   }, (calendarErr, calendarDocs) => {
     if (calendarErr) {
       console.error(calendarErr);
@@ -27,7 +34,7 @@ const weekendController = async (req, res) => {
         }
       });
       TripsMongoModel.find({
-        agency_key: AgencyKeyMapper[agency.toLowerCase()], service_id: { $in: serviceIds },
+        agency_key: agencyKey, service_id: { $in: serviceIds },
       }, (tripErr, tripDocs) => {
         if (tripErr) {
           console.error(tripErr);
@@ -41,7 +48,10 @@ const weekendController = async (req, res) => {
           });
         }
         const numWeekendRoutes = Object.keys(routeIds).length;
-        res.status(200).send({ NumWeekendRoutes: numWeekendRoutes });
+        res.status(200).send({
+          agency,
+          NumWeekendRoutes: numWeekendRoutes,
+        });
       });
     }
   });
