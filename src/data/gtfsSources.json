@@ -6,5 +6,21 @@
             "country": "USA"
         },
         "google_transit_zip": "http://www.itsmarta.com/google_transit_feed/google_transit.zip"
+    },
+    "ManhattanMTA": {
+        "location": {
+            "city": "New York City",
+            "state": "NY",
+            "country": "USA"
+        },
+        "google_transit_zip": "http://transitfeeds.com/p/mta/82/latest/download"
+    },
+    "BART": {
+        "location": {
+            "city": "Bay Area",
+            "state": "CA",
+            "country": "USA"
+        },
+        "google_transit_zip": "http://www.bart.gov/sites/default/files/docs/google_transit_20180526_v2.zip"
     }
 }

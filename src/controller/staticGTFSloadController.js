@@ -20,10 +20,19 @@ const loadCSV = (csvToLoad => new Promise((async (resolve, reject) => {
     const MongoModel = modelHash[fileName].model;
     const input = {};
 
+    // Clear previous entries
+    const agencyKey = AgencyKeyMapper[csvToLoad.agency.toLowerCase()];
+    MongoModel.deleteMany({ agency_key: agencyKey }, ((err) => {
+      if (err) {
+        console.error(`Delete error on ${csvToLoad.agency}`);
+        console.error(err);
+      }
+    }));
+
     for (let j = 1; j < data.length; j += 1) {
       for (let i = 0; i < headerArray.length; i += 1) {
         input[headerArray[i]] = data[j][i];
-        input.agency_key = AgencyKeyMapper[csvToLoad.agency.toLowerCase()];
+        input.agency_key = agencyKey;
       }
       try {
         await modelUpsert(MongoModel, input, fileName);
