@@ -2,9 +2,16 @@ import modelHash from '../data/models/modelHash';
 import AgencyKeyMapper from '../util/AgencyKeyMapper.json';
 
 const geoCenterController = async (req, res) => {
-  const { agency } = req.query;
+  let { agency } = req.query;
+  let { agencyKey } = req.query;
   const MongoModel = modelHash['stops.txt'].model;
-  MongoModel.find({ agency_key: AgencyKeyMapper[agency.toLowerCase()] }, (err, docs) => {
+  if (agencyKey == null) {
+    agencyKey = AgencyKeyMapper[agency.toLowerCase()];
+  }
+  if (agency == null) {
+    agency = 'N/A';
+  }
+  MongoModel.find({ agency_key: agencyKey }, (err, docs) => {
     if (err) {
       console.error(err);
       res.status(500).send('DB Error');
@@ -30,7 +37,11 @@ const geoCenterController = async (req, res) => {
       if (avgStopLat === 0) {
         res.status(500).send('DB Error');
       } else {
-        res.status(200).send({ AverageStopLatitude: avgStopLat, AverageStopLongitude: avgStopLon });
+        res.status(200).send({
+          agency,
+          AverageStopLatitude: Math.round(avgStopLat * 100) / 100,
+          AverageStopLongitude: Math.round(avgStopLon * 100) / 100,
+        });
       }
     }
   });
