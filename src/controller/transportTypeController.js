@@ -3,6 +3,7 @@ import AgencyKeyMapper from '../util/AgencyKeyMapper.json';
 
 const transportTypeController = async (req, res) => {
   const { agency } = req.query;
+  let { agencyKey } = req.query;
   const MongoModel = modelHash['routes.txt'].model;
   const transportMapping = {
     0: 'Tram, Streetcar, Light rail',
@@ -14,7 +15,10 @@ const transportTypeController = async (req, res) => {
     6: 'Gondala, Suspended cable car',
     7: 'Funicular',
   };
-  MongoModel.find({ agency_key: AgencyKeyMapper[agency.toLowerCase()] }, (err, docs) => {
+  if (agencyKey == null) {
+    agencyKey = AgencyKeyMapper[agency.toLowerCase()];
+  }
+  MongoModel.find({ agency_key: agencyKey }, (err, docs) => {
     if (err) {
       console.error(err);
       res.status(500).send('DB Error');
@@ -28,7 +32,7 @@ const transportTypeController = async (req, res) => {
             const currentCount = transportTypes[doc.route_type];
             transportTypes[doc.route_type] = currentCount + 1;
           } else {
-            transportTypes[doc.route_type] = 0;
+            transportTypes[doc.route_type] = 1;
           }
         }
       });
@@ -42,7 +46,7 @@ const transportTypeController = async (req, res) => {
       res.status(200).send({
         agency,
         transportType: transportMapping[mostPopularTransport.transport],
-        percentage: Math.round((mostPopularTransport.count / numberOfRoutes) * 100) / 100,
+        percentage: Math.round((mostPopularTransport.count / numberOfRoutes) * 100),
       });
     }
   });

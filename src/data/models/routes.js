@@ -13,7 +13,6 @@ const RouteModel = mongoose.model('Route', new mongoose.Schema({
   },
   route_short_name: {
     type: String,
-    required: true,
   },
   route_long_name: {
     type: String,
