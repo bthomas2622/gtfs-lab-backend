@@ -2,8 +2,7 @@ import modelHash from '../data/models/modelHash';
 import AgencyKeyMapper from '../util/AgencyKeyMapper.json';
 
 const weekendController = async (req, res) => {
-  let { agency } = req.query;
-  let { agencyKey } = req.query;
+  let { agency, agencyKey } = req.query;
   const CalendarMongoModel = modelHash['calendar.txt'].model;
   const TripsMongoModel = modelHash['trips.txt'].model;
   const serviceIds = [];

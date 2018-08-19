@@ -2,8 +2,7 @@ import modelHash from '../data/models/modelHash';
 import AgencyKeyMapper from '../util/AgencyKeyMapper.json';
 
 const transportTypeController = async (req, res) => {
-  let { agency } = req.query;
-  let { agencyKey } = req.query;
+  let { agency, agencyKey } = req.query;
   const MongoModel = modelHash['routes.txt'].model;
   const transportMapping = {
     0: 'Tram, Streetcar, Light rail',
