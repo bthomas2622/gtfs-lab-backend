@@ -30,7 +30,7 @@ var _index2 = _interopRequireDefault(_index);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-const PORT = process.env.PORT || 3000;
+const PORT = 3000;
 const app = (0, _express2.default)();
 
 _mongoose2.default.Promise = global.Promise;

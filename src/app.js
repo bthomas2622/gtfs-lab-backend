@@ -6,7 +6,7 @@ import mongoose from 'mongoose';
 import pkg from '../package.json';
 import routes from './routes/index';
 
-const PORT = process.env.PORT || 3000;
+const PORT = 3000;
 const app = express();
 
 mongoose.Promise = global.Promise;
