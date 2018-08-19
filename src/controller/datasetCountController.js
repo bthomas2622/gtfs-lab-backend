@@ -1,11 +1,11 @@
 import modelHash from '../data/models/modelHash';
-import AgencyKeyMapper from '../util/AgencyKeyMapper.json';
+import agencyKeyMapper from '../util/agencyKeyMapper.json';
 
 const datasetCountController = async (req, res) => {
   let { agency, agencyKey } = req.query;
   const { dataset } = req.query;
   if (agencyKey == null) {
-    agencyKey = AgencyKeyMapper[agency.toLowerCase()];
+    agencyKey = agencyKeyMapper[agency.toLowerCase()];
   }
   if (agency == null) {
     agency = 'N/A';

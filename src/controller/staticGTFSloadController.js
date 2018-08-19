@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 import fs from 'fs';
-import AgencyKeyMapper from '../util/AgencyKeyMapper.json';
+import agencyKeyMapper from '../util/agencyKeyMapper.json';
 import parseCSV from '../util/parseCSVtoArray';
 import modelUpsert from '../util/modelUpsert';
 import asyncForEach from '../util/asyncForEach';
@@ -21,7 +21,7 @@ const loadCSV = (csvToLoad => new Promise((async (resolve, reject) => {
     const input = {};
 
     // Clear previous entries
-    const agencyKey = AgencyKeyMapper[csvToLoad.agency.toLowerCase()];
+    const agencyKey = agencyKeyMapper[csvToLoad.agency.toLowerCase()];
     MongoModel.deleteMany({ agency_key: agencyKey }, ((err) => {
       if (err) {
         console.error(`Delete error on ${csvToLoad.agency}`);

@@ -1,11 +1,11 @@
 import modelHash from '../data/models/modelHash';
-import AgencyKeyMapper from '../util/AgencyKeyMapper.json';
+import agencyKeyMapper from '../util/agencyKeyMapper.json';
 
 const geoCenterController = async (req, res) => {
   let { agency, agencyKey } = req.query;
   const MongoModel = modelHash['stops.txt'].model;
   if (agencyKey == null) {
-    agencyKey = AgencyKeyMapper[agency.toLowerCase()];
+    agencyKey = agencyKeyMapper[agency.toLowerCase()];
   }
   if (agency == null) {
     agency = 'N/A';

@@ -1,5 +1,5 @@
 import modelHash from '../data/models/modelHash';
-import AgencyKeyMapper from '../util/AgencyKeyMapper.json';
+import agencyKeyMapper from '../util/agencyKeyMapper.json';
 
 const weekendController = async (req, res) => {
   let { agency, agencyKey } = req.query;
@@ -7,7 +7,7 @@ const weekendController = async (req, res) => {
   const TripsMongoModel = modelHash['trips.txt'].model;
   const serviceIds = [];
   if (agencyKey == null) {
-    agencyKey = AgencyKeyMapper[agency.toLowerCase()];
+    agencyKey = agencyKeyMapper[agency.toLowerCase()];
   }
   if (agency == null) {
     agency = 'N/A';
