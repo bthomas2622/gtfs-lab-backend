@@ -27,8 +27,6 @@
   "author": "Ben Thomas",
   "license": "ISC",
   "devDependencies": {
-    "babel-cli": "^6.26.0",
-    "babel-preset-env": "^1.6.1",
     "chai": "^4.1.2",
     "chai-http": "^4.0.0",
     "cross-env": "^5.1.5",
@@ -40,6 +38,8 @@
     "nodemon": "^1.17.4"
   },
   "dependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
     "adm-zip": "^0.4.11",
     "axios": "^0.18.0",
     "body-parser": "^1.18.2",
