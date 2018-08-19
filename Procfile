@@ -1,1 +1,1 @@
-web: node build/app.js -p $PORT"
+web: node build/app.js -p $PORT
