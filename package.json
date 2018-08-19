@@ -4,8 +4,7 @@
   "description": "Experimenting with General Transit Feed Specification (GTFS)",
   "main": "app.js",
   "scripts": {
-    "prestart": "babel src -d build",
-    "start": "node build/app.js",
+    "start": "babel src -d build --copy-files && node build/app.js",
     "dev": "cross-env NODE_ENV=development nodemon ./src/app.js --exec babel-node --ignore *.spec.js",
     "test": "cross-env NODE_ENV=test mocha ./test --recursive --exit --require babel-core/register",
     "downloadGTFS": "babel-node src/data/processGTFSzip.js",

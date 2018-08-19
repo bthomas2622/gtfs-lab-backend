@@ -1,1 +1,1 @@
-web: babel src -d build && node build/app.js
+web: babel src -d build --copy-files && node build/app.js
