@@ -5,6 +5,7 @@
   "main": "app.js",
   "scripts": {
     "start": "babel src -d build --copy-files && node build/app.js",
+    "postinstall": "babel src -d build --copy-files",
     "dev": "cross-env NODE_ENV=development nodemon ./src/app.js --exec babel-node --ignore *.spec.js",
     "test": "cross-env NODE_ENV=test mocha ./test --recursive --exit --require babel-core/register",
     "downloadGTFS": "babel-node src/data/processGTFSzip.js",
