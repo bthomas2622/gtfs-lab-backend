@@ -28,7 +28,7 @@ The **"test"** folder holds the unit tests. The **"node_modules"** are the proje
 * **Node.js** - My personal favorite webapp backbone. I love how lightweight it is, adore NPM, and dig ECMA2018. It also made sense to go with JS for the MongoDB db choice. 
 * **Expressjs** - The leading web app framework for Node.js    
 * **Docker** - Containerization is one of the most exciting evolutions in tech right now. I have had great experience utilizing docker to stabilize deployments, streamline CI/CD, and scale apps. 
-* **Google Cloud Platform** - The cloud platform I have the most experience with. Features that made a good fit for my project: free trial, container image repository, app engine, and stackdriver logging. 
+* **Heroku** - The best free tier cloud application platform! Excellent CLI tools. 
 
 ### **How to "Run"**
 
@@ -44,6 +44,7 @@ Anyone is welcome to re-use the code used in this project.
 * [Expressjs](https://expressjs.com/)
 * [MongoDB](https://www.mongodb.com/)
 * [Babel](https://babeljs.io/)
+* [Heroku](https://www.heroku.com/)
 * [Docker](https://www.docker.com/)
 
 #### **Contact Me**
