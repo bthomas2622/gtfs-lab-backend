@@ -1,10 +1,10 @@
 import mongoose from 'mongoose';
 import fs from 'fs';
-import agencyKeyMapper from '../util/agencyKeyMapper.json';
 import parseCSV from '../util/parseCSVtoArray';
 import modelUpsert from '../util/modelUpsert';
 import asyncForEach from '../util/asyncForEach';
 import modelHash from '../data/models/modelHash';
+import agencyKeyMapper from '../util/agencyKeyMapper.json';
 
 mongoose.Promise = global.Promise;
 
