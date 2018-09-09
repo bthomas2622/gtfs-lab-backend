@@ -28,12 +28,20 @@ var _transportTypeController = require('../controller/transportTypeController');
 
 var _transportTypeController2 = _interopRequireDefault(_transportTypeController);
 
+var _deleteAgencyControler = require('../controller/deleteAgencyControler');
+
+var _deleteAgencyControler2 = _interopRequireDefault(_deleteAgencyControler);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 const router = _express2.default.Router();
 
 router.get('/load', (req, res) => {
   (0, _staticGTFSloadController2.default)(req, res);
+});
+
+router.get('/delete', (req, res) => {
+  (0, _deleteAgencyControler2.default)(req, res);
 });
 
 router.get('/fetch/count', (req, res) => {

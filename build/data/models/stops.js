@@ -51,7 +51,7 @@ const StopModel = _mongoose2.default.model('Stop', new _mongoose2.default.Schema
   location_type: {
     type: Number,
     min: 0,
-    max: 1
+    max: 2
   },
   parent_station: String,
   stop_timezone: String,
