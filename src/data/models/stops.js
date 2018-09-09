@@ -41,7 +41,7 @@ const StopModel = mongoose.model('Stop', new mongoose.Schema({
   location_type: {
     type: Number,
     min: 0,
-    max: 1,
+    max: 2,
   },
   parent_station: String,
   stop_timezone: String,

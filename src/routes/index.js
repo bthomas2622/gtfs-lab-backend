@@ -5,11 +5,16 @@ import geoCenterController from '../controller/geoCenterController';
 import agencyListController from '../controller/agencyListController';
 import weekendController from '../controller/weekendController';
 import transportTypeController from '../controller/transportTypeController';
+import deleteAgencyController from '../controller/deleteAgencyControler';
 
 const router = express.Router();
 
 router.get('/load', (req, res) => {
   staticGTFSloadController(req, res);
+});
+
+router.get('/delete', (req, res) => {
+  deleteAgencyController(req, res);
 });
 
 router.get('/fetch/count', (req, res) => {
