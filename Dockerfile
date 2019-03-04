@@ -1,23 +1,11 @@
 FROM node
-WORKDIR /usr/src/app
+WORKDIR /app
 
-# Install app dependencies
-# A wildcard is used to ensure both package.json AND package-lock.json are copied
-# where available (npm@5+)
-COPY package*.json ./
-RUN npm i
-# If you are building your code for production
-# RUN npm install --only=production
-
-# Bundle app source
-COPY . .
-
-# The app binds to port 8080
 EXPOSE 8080
 
-ARG NODE_ENV=production
-ENV NODE_ENV ${NODE_ENV}
+COPY . /app
 
-ENV DOCKER=true
+RUN npm install \
+  && npm run build
 
-CMD if [ $NODE_ENV = development ]; then npm run dev; else npm start; fi
+CMD ["npm", "start"]
