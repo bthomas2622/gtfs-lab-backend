@@ -17,4 +17,24 @@ describe('/GET app info', () => {
         done();
       });
   });
+  it('should GET package version', (done) => {
+    chai.request(app)
+      .get('/version')
+      .end((err, res) => {
+        expect(res.status).to.equal(200);
+        expect(res.body).to.be.a('Object');
+        expect(res.body).to.have.key('version');
+        done();
+      });
+  });
+  it('should GET app health', (done) => {
+    chai.request(app)
+      .get('/health')
+      .end((err, res) => {
+        expect(res.status).to.equal(200);
+        expect(res.body).to.be.a('Object');
+        expect(res.body).to.deep.equal({ status: 'UP' });
+        done();
+      });
+  });
 });
