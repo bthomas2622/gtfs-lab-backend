@@ -13,7 +13,8 @@ describe('/GET /fetch/agencies', () => {
       .end((err, res) => {
         expect(res.status).to.equal(200);
         expect(res.body).to.be.a('Array');
-        res.body.every(i => expect(i).to.include.keys('agency_key', 'agency_email', 'agency_id', 'agency_lang', 'agency_name', 'agency_phone', 'agency_timezone', 'agency_url', 'created', 'last_updated'));
+        res.body.every(i => expect(i).to.be.a('Object'));
+        res.body.every(i => expect(i).to.have.any.keys('agency_id', 'agency_key', 'agency_lang', 'agency_name', 'agency_timezone', 'agency_url', 'created', 'last_updated', 'agency_phone'));
         done();
       });
   });
