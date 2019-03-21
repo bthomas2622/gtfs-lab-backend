@@ -14,7 +14,7 @@ describe('/GET /fetch/agencies', () => {
         expect(res.status).to.equal(200);
         expect(res.body).to.be.a('Array');
         res.body.every(i => expect(i).to.be.a('Object'));
-        res.body.every(i => expect(i).to.have.any.keys('agency_id', 'agency_key', 'agency_lang', 'agency_name', 'agency_timezone', 'agency_url', 'created', 'last_updated', 'agency_phone'));
+        res.body.every(i => expect(i).to.have.any.keys('agency_email', 'agency_id', 'agency_key', 'agency_lang', 'agency_name', 'agency_timezone', 'agency_url', 'created', 'last_updated', 'agency_phone'));
         done();
       });
   });
