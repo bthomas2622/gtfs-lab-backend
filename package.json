@@ -8,7 +8,7 @@
     "start": "node build/app.js",
     "dev": "cross-env NODE_ENV=development nodemon ./src/app.js --exec babel-node --ignore *.spec.js",
     "test": "cross-env NODE_ENV=test mocha --require babel-core/register ./test --recursive --exit",
-    "integration-test": "cross-env NODE_ENV=test mocha --require babel-core/register ./integration-test --recursive --timeout 10000 --exit",
+    "integration-test": "cross-env NODE_ENV=test mocha --require babel-core/register ./integration-test --recursive --timeout 50000 --exit",
     "downloadGTFS": "babel-node src/data/processGTFSzip.js",
     "initialLoad": "babel-node src/controller/staticGTFSloadController.js",
     "testFunction": "babel-node src/testScripts"
