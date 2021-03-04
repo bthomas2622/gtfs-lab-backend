@@ -34,7 +34,9 @@ const PORT = process.env.PORT || 3000;
 const app = (0, _express2.default)();
 
 _mongoose2.default.Promise = global.Promise;
-_mongoose2.default.connect('mongodb://gtfslab:marta1@ds259351.mlab.com:59351/gtfs-lab', { keepAlive: 120 }).then(() => console.log('mongo connection successful')).catch(err => console.error(err));
+_mongoose2.default.connect('mongodb+srv://gtfslab:marta1@gtfs-lab.i9xjm.mongodb.net/gtfs-lab', { keepAlive: 120, useNewUrlParser: true }).then(() => console.log('mongo connection successful')).catch(err => console.error(err));
+
+_mongoose2.default.set('useCreateIndex', true);
 
 app.use((0, _morgan2.default)('dev'));
 app.use(_bodyParser2.default.json());

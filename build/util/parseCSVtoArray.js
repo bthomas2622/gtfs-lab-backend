@@ -24,8 +24,8 @@ const parseCSV = file => new Promise((resolve, reject) => {
   const reader = _readline2.default.createInterface(instream, outstream);
   const csvToArray = [];
 
-  console.log('in parse csv');
-  console.log(file.filePath);
+  console.debug('in parse csv');
+  console.debug(file.filePath);
 
   try {
     let lineNum = 1;
@@ -46,10 +46,10 @@ const parseCSV = file => new Promise((resolve, reject) => {
           console.error(line);
           try {
             const traditionalSplit = line.split(',');
-            console.log('test split');
-            console.log(traditionalSplit);
+            console.debug('test split');
+            console.debug(traditionalSplit);
             if (traditionalSplit.length === colNum) {
-              console.log('pushing test split to csv array');
+              console.debug('pushing test split to csv array');
               csvToArray.push(traditionalSplit);
             }
             return null;
@@ -74,7 +74,7 @@ const parseCSV = file => new Promise((resolve, reject) => {
       lineNum += 1;
     });
     reader.on('close', () => {
-      console.log(`done reading ${file.filePath}`);
+      console.debug(`done reading ${file.filePath}`);
       resolve(csvToArray);
     });
   } catch (err) {

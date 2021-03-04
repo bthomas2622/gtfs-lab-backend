@@ -24,7 +24,7 @@ const datasetCountController = async (req, res) => {
     agency = 'N/A';
   }
   const MongoModel = _modelHash2.default[`${dataset}.txt`].model;
-  MongoModel.count({ agency_key: agencyKey }, (err, count) => {
+  MongoModel.countDocuments({ agency_key: agencyKey }, (err, count) => {
     if (err) {
       console.error(err);
       res.status(500).send('DB Error');
